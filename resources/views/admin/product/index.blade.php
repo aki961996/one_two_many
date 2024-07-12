@@ -43,7 +43,8 @@
                                 <td>
                                     <a href="{{route('product.edit', encrypt($products->id) )}}"
                                         class="btn btn-sm btn-primary">Edit</a>
-                                    <form action="" method="POST" {{-- {{route('category.destroy', $category->id)}} --}}
+                                    <form action="{{route('product.destroy', encrypt($products->id))}} --}}"
+                                        method="POST" {{-- {{route('category.destroy', $category->id)}} --}}
                                         style="display: inline;">
                                         @csrf
                                         @method('DELETE')

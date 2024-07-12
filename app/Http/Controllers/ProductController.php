@@ -12,7 +12,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $categories = Product::paginate(7);
+        // $categories = Product::paginate(7);
+        $categories = Product::latest()->paginate(7);
 
         return view('admin.product.index', ['product' => $categories]);
     }
@@ -32,7 +33,6 @@ class ProductController extends Controller
 
         $categories = Category::findOrFail($request->category_id);
 
-
         $product = new Product();
         $product->name = $request->name;
         $product->price = $request->price;
@@ -40,7 +40,6 @@ class ProductController extends Controller
         $product->category_id = $categories->id;
 
         $categories->products()->save($product);
-
         // $categories->products()->create([
         //     'name' => $request->name,
         //     'price' => $request->price,
@@ -81,5 +80,16 @@ class ProductController extends Controller
             $data->save();
             return redirect()->route('product.index')->with('success', 'Category updated successfully');
         }
+    }
+
+    public function destroy($id)
+    {
+        $id = decrypt($id);
+        $category = Product::find($id);
+        if (!$category) {
+            abort(404);
+        }
+        $category->delete();
+        return redirect()->route('product.index')->with('success', 'Category deleted successfully');
     }
 }

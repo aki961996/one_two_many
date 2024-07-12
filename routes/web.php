@@ -26,6 +26,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/category/create', 'store')->name('category.store');
         Route::get('/category/edit/{id}', 'edit')->name('category.edit');
         Route::post('/category/update', 'update')->name('category.update');
+        Route::delete('/category/destroy/{id}', 'destroy')->name('category.destroy');
     });
 
     Route::controller(ProductController::class)->group(function () {
@@ -34,5 +35,6 @@ Route::prefix('admin')->group(function () {
         Route::post('/product/create', 'store')->name('product.store');
         Route::get('/product/edit/{id}', 'edit')->name('product.edit');
         Route::post('/product/update', 'update')->name('product.update');
+        Route::delete('/product/destroy/{id}', 'destroy')->name('product.destroy');
     });
 });
