@@ -1,0 +1,5 @@
+.ba-none::after,
+.ba-none::before {
+    content: none;
+    display: none;
+}
